@@ -28,7 +28,7 @@ class ConsumerPage extends React.Component{
   }
 
   cancelProduct(productId){
-    this.socket.emit('CANCEL_PRODUCT', {productId});
+    this.socket.emit('CANCEL_ORDER', {productId});
   }
 
   render(){

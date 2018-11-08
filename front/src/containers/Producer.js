@@ -8,21 +8,37 @@ class ProducerPage extends React.Component{
 
     this.state = {
       productList: [],
+      PRODUCING_TIME: 3000,
     };
 
+    this.produce = this.produce.bind(this);
     this.socket = io('http://localhost:3001/producer');
   }
 
   componentDidMount(){
-    this.socket.on('PRODUCT_LIST', (data) => this.setState({productList: data.productList}))
+    this.socket.on('GET_PRODUCT_LIST', (data) => this.setState({productList: data.productList}))
   }
 
   componentWillUnmount(){
     this.socket.close();
   }
 
+  produce(productId){
+    this.socket.emit('START_PRODUCTION', { productId});
+    
+    setTimeout(() => {
+      this.socket.emit('FINISH_PRODUCT', { productId });
+    }, this.state.PRODUCING_TIME)
+  }
+
   render(){
-    return <Producer {...this.state} {...this.props}/>
+    return (
+      <Producer
+        onProduce={this.produce}
+        {...this.state}
+        {...this.props}
+      />
+    ) 
   }
 }
 

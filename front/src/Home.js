@@ -9,12 +9,6 @@ class Home extends React.Component{
 
     this.state = {
       role: null,
-      productList: [
-        { name: 'a', qt: 2 },
-        { name: 'b', qt: 0 },
-        { name: 'c', qt: 5 },
-        { name: 'd', qt: 3 },
-      ],
     };
   }
 

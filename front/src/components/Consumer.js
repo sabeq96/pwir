@@ -14,12 +14,13 @@ const Consumer = ({
         <div key={product.name}>
           <span>{product.name}</span>
           {
-            product.qt > 0 ? (
+            product.lobby > 0 ? (
               <button onClick={() => { onCancelProduct(product.name) }}>-</button>
             ) : null
           }
-          <span>{product.qt}</span>
+          <span>{product.lobby}</span>
           <button onClick={() => { onOrderProduct(product.name) }}>+</button>
+          <span>owned:{product.owned}</span>
         </div>
       ))
     }
