@@ -3,6 +3,16 @@ import React from 'react';
 import Producer from './containers/Producer';
 import Consumer from './containers/Consumer';
 
+import {
+  SiteWrapper,
+  PageTitle,
+  ProductWrapper,
+  ProductRow,
+  ChooseAgain,
+  RoleWrapper,
+  SingleRoleWrapper,
+} from './components/Global.styles';
+
 class Home extends React.Component{
   constructor(props){
     super(props);
@@ -18,13 +28,15 @@ class Home extends React.Component{
 
   render() {
     return (
-      <React.Fragment>
+      <SiteWrapper>
         {
           !this.state.role ? (
             <div>
-              <div>Choose who you are</div>
-              <div onClick={() => this.setRole('producer')}>Procudcer</div>
-              <div onClick={() => this.setRole('consumer')}>Consumer</div>  
+              <PageTitle>Choose who you are</PageTitle>
+              <RoleWrapper>
+                <SingleRoleWrapper onClick={() => this.setRole('producer')}>Procudcer</SingleRoleWrapper>
+                <SingleRoleWrapper onClick={() => this.setRole('consumer')}>Consumer</SingleRoleWrapper>  
+              </RoleWrapper>
             </div>
           ) : this.state.role === 'producer' ? (
             <Producer 
@@ -36,7 +48,7 @@ class Home extends React.Component{
             />
           )
         }
-      </React.Fragment>
+      </SiteWrapper>
     )
   }
 }
