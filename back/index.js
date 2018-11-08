@@ -21,11 +21,7 @@ const getCustomerOrders = (customerId) =>
   state.productList.map((product) => {
     const lobby = product.lobby.filter((id) => id === customerId);
     const owned = product.owned.filter((id) => id === customerId);
-    console.log({
-      name: product.name,
-      lobby: lobby.length,
-      owned: owned.length,
-    })
+
     return {
       name: product.name,
       lobby: lobby.length,
