@@ -2,6 +2,8 @@ const getCustomerItems = require('./utils/getProducts').getCustomerItems;
 const getProducerItems = require('./utils/getProducts').getProducerItems;
 const state = require('./state');
 
+setInterval(() => console.log(state.productList), 1000);
+
 const start = ({ PRODUCERS, CONSUMERS }) => CONSUMERS.on('connection', (socket) => {
   console.log(socket.id, 'connected to customers');
   socket.emit('GET_PRODUCT_LIST', { productList: getCustomerItems(socket.id) });
@@ -34,7 +36,7 @@ const start = ({ PRODUCERS, CONSUMERS }) => CONSUMERS.on('connection', (socket) 
     console.log(socket.id, 'canceled', productId);
     state.productList.forEach((product) => {
       if (product.name === productId) {
-        const index = product.lobby.lastIndexOf((id) => id === socket.id);
+        const index = product.lobby.lastIndexOf(socket.id);
         return product.lobby.splice(index, 1);
       } else return product;
     })
