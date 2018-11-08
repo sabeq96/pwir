@@ -6,9 +6,6 @@ import Consumer from './containers/Consumer';
 import {
   SiteWrapper,
   PageTitle,
-  ProductWrapper,
-  ProductRow,
-  ChooseAgain,
   RoleWrapper,
   SingleRoleWrapper,
 } from './components/Global.styles';
