@@ -2,8 +2,6 @@ const getCustomerItems = require('./utils/getProducts').getCustomerItems;
 const getProducerItems = require('./utils/getProducts').getProducerItems;
 const state = require('./state');
 
-setInterval(() => console.log(state.productList), 1000);
-
 const start = ({ PRODUCERS, CONSUMERS }) => CONSUMERS.on('connection', (socket) => {
   console.log(socket.id, 'connected to customers');
   socket.emit('GET_PRODUCT_LIST', { productList: getCustomerItems(socket.id) });
