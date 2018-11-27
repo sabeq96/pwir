@@ -19,8 +19,11 @@ const getCustomerItems = (customerId) =>
   
       return {
         name: product.name,
-        qt: qt.length,
-        inProduction: inProduction.length,
+        qt_me: qt.length,
+        qt_total: product.qt.length,
+        inProduction_me: inProduction.length,
+        inProduction_total: product.inProduction.length,
+        debug: product.inProduction,
       }
     });
 

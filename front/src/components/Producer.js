@@ -17,7 +17,6 @@ import {
 const Producer = ({
   PRODUCING_TIME,
   productList,
-  onProduce,
   onSetRole,
 }) => (
   <SiteWrapper>
@@ -27,20 +26,11 @@ const Producer = ({
         productList.map((product) => (
           <ProductRow key={product.name}>
             <span>Product name: {product.name}</span>
-            <span>In warehouse: {product.qt}</span>
-            <button
-              onClick={
-                !product.inProduction > 0 ?
-                  () => onProduce(product.name)
-                : null
-              }
-              disabled={product.inProduction > 0}
-            >
-              Produce
-            </button>
+            <span>In warehouse: {product.qt_me}</span>
             <Loader>
+            {console.debug('debug', product.inProduction_me < 0 ? null : product.debug)}
               <ProgressBar
-                isProducing={product.inProduction > 0}
+                isProducing={product.inProduction_me > 0}
                 time={PRODUCING_TIME}
               />
             </Loader>
@@ -55,7 +45,6 @@ const Producer = ({
 Producer.propTypes = {
   PRODUCING_TIME: PropTypes.number.isRequired,
   productList: PropTypes.array.isRequired,
-  onProduce: PropTypes.func.isRequired,
   onSetRole: PropTypes.func.isRequired,
 }
 

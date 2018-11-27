@@ -24,7 +24,7 @@ const start = ({ PRODUCERS, CONSUMERS }) => PRODUCERS.on('connection', (socket) 
     state.productList.forEach((product) => {
       if (product.name === productId) {
         const index = product.inProduction.lastIndexOf(socket.id);
-        console.log(product.inProduction);
+
         return product.inProduction.splice(index, 1);
       } else return product;
     });
