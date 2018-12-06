@@ -11,6 +11,8 @@ import {
 
 import {
   ButtonWrapper,
+  LobbyWaiter,
+  Queue,
 } from './Consumer.styles';
 
 const Consumer = ({
@@ -23,20 +25,27 @@ const Consumer = ({
     <PageTitle>So, you are Consumer !</PageTitle>
     <ProductWrapper>
       {
-        productList.map((product) => (
-          <ProductRow key={product.name}>
-            <div>Product name: {product.name}</div>
-            <div>Ordered: {product.lobby}</div>
-            <ButtonWrapper>
-              {
-                product.lobby > 0 ? (
-                  <button onClick={() => { onCancelProduct(product.name) }}>-</button>
-                ) : null
-              }
-              <button onClick={() => { onOrderProduct(product.name) }}>+</button>
-            </ButtonWrapper>
-            <div>Owned: {product.owned}</div>
-          </ProductRow>
+        productList.map((product, key) => (
+          <React.Fragment key={key}>
+            <ProductRow key={product.name}>
+              <div>Product name: {product.name}</div>
+              <div>In stock: {product.qt_total}</div>
+              <div>Ordered: {product.lobby}</div>
+              <div>All waiters: {product.lobby_total}</div>
+              <ButtonWrapper>
+                {
+                  product.lobby > 0 ? (
+                    <button onClick={() => { onCancelProduct(product.name) }}>-</button>
+                  ) : null
+                }
+                <button onClick={() => { onOrderProduct(product.name) }}>+</button>
+              </ButtonWrapper>
+              <div>Owned: {product.owned}</div>
+            </ProductRow>
+            <Queue>
+              {product.lobby_total.map((iAm, key) => <LobbyWaiter iAm={iAm} key={key}/>)}
+            </Queue>
+          </React.Fragment>
         ))
       }
     </ProductWrapper>

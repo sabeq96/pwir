@@ -7,12 +7,8 @@ import {
   ProductWrapper,
   ProductRow,
   ChooseAgain,
-} from './Global.styles';
-
-import {
   Loader,
-  ProgressBar,
-} from './Producer.styles';
+} from './Global.styles';
 
 const Producer = ({
   PRODUCING_TIME,
@@ -26,14 +22,10 @@ const Producer = ({
         productList.map((product) => (
           <ProductRow key={product.name}>
             <span>Product name: {product.name}</span>
-            <span>In warehouse: {product.qt_me}</span>
-            <Loader>
-            {console.debug('debug', product.inProduction_me < 0 ? null : product.debug)}
-              <ProgressBar
-                isProducing={product.inProduction_me > 0}
-                time={PRODUCING_TIME}
-              />
-            </Loader>
+            <span>My warehouse: {product.qt_me}</span>
+            <span>Total in warehouse: {product.qt_total}</span>
+            <span>Total queries: {product.lobby_total}</span>
+            {product.inProduction_me > 0? <Loader /> : <div></div>}
           </ProductRow>
         ))
       }

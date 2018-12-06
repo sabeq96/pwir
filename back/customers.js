@@ -5,7 +5,7 @@ const state = require('./state');
 const start = ({ PRODUCERS, CONSUMERS }) => CONSUMERS.on('connection', (socket) => {
   console.log(socket.id, 'connected to customers');
   socket.emit('GET_PRODUCT_LIST', { productList: getCustomerItems(socket.id) });
-  
+
   socket.on('ORDER_PRODUCT', ({ productId }) => {
     if (state.productList.some((product) =>
       product.name === productId
@@ -22,9 +22,9 @@ const start = ({ PRODUCERS, CONSUMERS }) => CONSUMERS.on('connection', (socket) 
       })
     } else {
       console.log(socket.id, 'ordered', productId);
-      state.productList.forEach((product) => (
+      state.productList.forEach((product) => {
         product.name === productId ? product.lobby.push(socket.id) : product
-      ));
+      });
     }
     
     socket.emit('GET_PRODUCT_LIST', { productList: getCustomerItems(socket.id) });

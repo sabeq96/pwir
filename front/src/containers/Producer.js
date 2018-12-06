@@ -9,28 +9,29 @@ class ProducerPage extends React.Component{
     this.state = {
       productList: [],
       PRODUCING_TIME: 3000,
+      inProduction: false,
     };
 
     this.socket = io('http://localhost:3001/producer');
     this.startProduction = this.startProduction.bind(this);
-    this.production = setInterval(() => this.startProduction(), this.state.PRODUCING_TIME + 10)
+    this.production = setInterval(() => this.startProduction(), this.state.PRODUCING_TIME + 1000);
   }
 
-  somethingInProduction(productList){
-    return productList.some((product) => 
-      product.inProduction_me > 0
-    )
+  somethingInProduction(){
+    return this.state.inProduction
   }
 
   chooseProductToProduce(productList){
     const chances = productList.map((product) => ({
       name: product.name,
-      chance: (product.qt_me > 0) ?
-        (1 - (product.qt_me/product.qt_total)) * 100
-        : 100
+      chance: product.lobby_total
     }));
     
-    const choosedProduct = chances.reduce((prev, next) => prev.chance < next.chance ? next : prev)
+    let choosedProduct = chances.reduce((prev, current) => prev.chance < current.chance ? current : prev)
+    if(choosedProduct.chance === 0){
+      choosedProduct = productList[Math.floor(Math.random() * productList.length)];
+    }
+
     return choosedProduct.name;
   }
 
@@ -43,7 +44,6 @@ class ProducerPage extends React.Component{
 
   componentDidMount(){
     this.socket.on('GET_PRODUCT_LIST', (data) => {
-      console.log(data.productList);
       this.setState({ productList: data.productList })
     });
   }
@@ -54,12 +54,12 @@ class ProducerPage extends React.Component{
   }
 
   produce(productId){
+    this.setState({inProduction: true})
     this.socket.emit('START_PRODUCTION', { productId });
-    console.log(new Date().getTime());
-    console.log('produce')
+
     setTimeout(() => {
+      this.setState({inProduction: false})
       this.socket.emit('FINISH_PRODUCT', { productId });
-      console.log('finished')
     }, this.state.PRODUCING_TIME)
   }
 

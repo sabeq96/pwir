@@ -23,6 +23,14 @@ class Home extends React.Component{
     this.setState({role: role})
   }
 
+  checkIfAllowed = () => {
+    const inputPassword = window.prompt('Please enter password', '');
+    
+    if (inputPassword === '1234') {
+      this.setRole('producer')
+    }
+  } 
+
   render() {
     return (
       <SiteWrapper>
@@ -31,7 +39,7 @@ class Home extends React.Component{
             <div>
               <PageTitle>Choose who you are</PageTitle>
               <RoleWrapper>
-                <SingleRoleWrapper onClick={() => this.setRole('producer')}>Procudcer</SingleRoleWrapper>
+                <SingleRoleWrapper onClick={() => this.checkIfAllowed()}>Procudcer</SingleRoleWrapper>
                 <SingleRoleWrapper onClick={() => this.setRole('consumer')}>Consumer</SingleRoleWrapper>  
               </RoleWrapper>
             </div>

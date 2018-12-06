@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const SiteWrapper = styled.div`
   width: 100%;
@@ -21,7 +21,9 @@ const ProductWrapper = styled.div`
 
 const ProductRow = styled.div`
   padding: 10px;
+  height: 50px;
   display: flex;
+  align-items: center;
   justify-content: space-around;
 `;
 
@@ -56,6 +58,20 @@ const SingleRoleWrapper = styled.div`
   }
 `;
 
+const loaderAnimation = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+const Loader = styled.div`
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: ${loaderAnimation} 2s linear infinite;
+`;
+
 export {
   SiteWrapper,
   PageTitle,
@@ -64,4 +80,5 @@ export {
   ChooseAgain,
   RoleWrapper,
   SingleRoleWrapper,
+  Loader,
 };
