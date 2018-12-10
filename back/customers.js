@@ -6,6 +6,10 @@ const start = ({ PRODUCERS, CONSUMERS }) => CONSUMERS.on('connection', (socket) 
   console.log(socket.id, 'connected to customers');
   socket.emit('GET_PRODUCT_LIST', { productList: getCustomerItems(socket.id) });
 
+  socket.on('GIVE_ME_DATA', () => {
+    socket.emit('I_GIVE_U_DATA', { productList: getCustomerItems(socket.id)})
+  });
+
   socket.on('ORDER_PRODUCT', ({ productId }) => {
     if (state.productList.some((product) =>
       product.name === productId

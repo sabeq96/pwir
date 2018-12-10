@@ -7,10 +7,6 @@ const start = ({ PRODUCERS, CONSUMERS }) => PRODUCERS.on('connection', (socket) 
   console.log(socket.id, 'connected to producers');
   socket.emit('GET_PRODUCT_LIST', { productList: getProducerItems(socket.id) });
 
-  socket.on('GIVE_ME_DATA', () => {
-    socket.emit('I_GIVE_U_DATA', { productList: getCustomerItems(socket.id)})
-  });
-
   socket.on('START_PRODUCTION', ({ productId }) => {
     console.log(socket.id, 'just started producting', productId);  
     state.productList.forEach((product) => {

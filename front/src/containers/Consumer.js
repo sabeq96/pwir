@@ -20,7 +20,7 @@ class ConsumerPage extends React.Component{
     this.socket.on('GET_PRODUCT_LIST', (data) => this.setState({productList: data.productList}))
     
     this.socket.on('I_GIVE_U_DATA', (data) => this.setState({productList: data.productList}))
-    this.refreshData = setInterval(() => this.socket.emit('GIVE_ME_DATA'), 500);
+    this.refreshData = setInterval(() => { this.socket.emit('GIVE_ME_DATA') }, 200 );
   }
 
   componentWillUnmount(){

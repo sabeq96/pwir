@@ -24,7 +24,7 @@ class ProducerPage extends React.Component{
   chooseProductToProduce(productList){
     const chances = productList.map((product) => ({
       name: product.name,
-      chance: product.lobby_total
+      chance: product.lobby_total - product.inProduction_total
     }));
     
     let choosedProduct = chances.reduce((prev, current) => prev.chance < current.chance ? current : prev)

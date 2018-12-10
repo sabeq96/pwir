@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Home from './Home';
 
-const title = 'My Minimal React Webpack Babel Setup';
+const title = 'Programowanie współbierzne i równoległe';
 
 ReactDOM.render(
   <Home/>,

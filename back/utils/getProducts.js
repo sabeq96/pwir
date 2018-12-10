@@ -4,7 +4,7 @@ const getCustomerItems = (customerId) =>
   state.productList.map((product) => {
     const lobby = product.lobby.filter((id) => id === customerId);
     const owned = product.owned.filter((id) => id === customerId);
-    const lobbyArray = product.lobby.slice(0, 10).map((id) => id === customerId ? true : false);
+    const lobbyArray = product.lobby.slice(0, 20).map((id) => id === customerId ? true : false);
     
     return {
       name: product.name,

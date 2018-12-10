@@ -31,7 +31,7 @@ const Consumer = ({
               <div>Product name: {product.name}</div>
               <div>In stock: {product.qt_total}</div>
               <div>Ordered: {product.lobby}</div>
-              <div>All waiters: {product.lobby_total}</div>
+              <div>All waiters: {product.lobby_total.length}</div>
               <ButtonWrapper>
                 {
                   product.lobby > 0 ? (
