@@ -13,12 +13,8 @@ class ProducerPage extends React.Component{
     };
 
     this.socket = io('http://localhost:3001/producer');
-    this.startProduction = this.startProduction.bind(this);
+    // this.startProduction = this.startProduction.bind(this);
     this.production = setInterval(() => this.startProduction(), this.state.PRODUCING_TIME + 1000);
-  }
-
-  somethingInProduction(){
-    return this.state.inProduction
   }
 
   chooseProductToProduce(productList){
@@ -35,8 +31,8 @@ class ProducerPage extends React.Component{
     return choosedProduct.name;
   }
 
-  startProduction() {
-    if (!this.somethingInProduction(this.state.productList)) {
+  startProduction = () => {
+    if (!this.state.inProduction) {
       const productId = this.chooseProductToProduce(this.state.productList);
       this.produce(productId);
     }

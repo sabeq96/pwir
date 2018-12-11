@@ -33,12 +33,18 @@ const Consumer = ({
               <div>Ordered: {product.lobby}</div>
               <div>All waiters: {product.lobby_total.length}</div>
               <ButtonWrapper>
-                {
-                  product.lobby > 0 ? (
-                    <button onClick={() => { onCancelProduct(product.name) }}>-</button>
-                  ) : null
-                }
-                <button onClick={() => { onOrderProduct(product.name) }}>+</button>
+                <button
+                  onClick={() => { onCancelProduct(product.name) }}
+                  disabled={product.lobby < 0}
+                >
+                  -
+                </button>
+                <button
+                  onClick={() => { onOrderProduct(product.name) }}
+                  disabled={product.lobby > 6}
+                >
+                  +
+                </button>
               </ButtonWrapper>
               <div>Owned: {product.owned}</div>
             </ProductRow>
